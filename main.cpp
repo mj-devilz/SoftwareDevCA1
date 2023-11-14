@@ -1,9 +1,9 @@
 #include "raylib.h"
 
 int main() {
-    // Determin the Game Window Width and Height
+    // Changed window width and height to give a nice square view
     const int screenWidth = 800;
-    const int screenHeight = 450;
+    const int screenHeight = 800;
 
     // Initialize the Window
     InitWindow(screenWidth, screenHeight, "First Project");
