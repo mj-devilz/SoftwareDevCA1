@@ -20,6 +20,12 @@ int main()
     // frames in player texture
     float imageFrame{4.0f};
 
+    // Animation variables
+    float runningTime{}; // updated every frame
+    int animationFrame{}; //frame count 
+    const int maxAnimationFrames{4}; // max number of frames for image
+    const float updateTime{1.0f / 8.0f}; // amount of time to pass before updating animation frame (8 times /second)
+
     // Getting Player texture and location
     Texture2D playerTexture = LoadTexture("assets/Slime_Idle.png");
     // Player position is centre of view
@@ -47,11 +53,17 @@ int main()
         // Drawing map to scene | Map size scale it x 3
         DrawTextureEx(mapTexture, mapPosition, 0.0f, imageScale, WHITE);
 
-        // update animation frame
+        // Updating animation frame
+        runningTime += GetFrameTime();
+        if(runningTime >= updateTime){
+            animationFrame++; // increment frame
+            runningTime = 0.0f; //reset running time
+            if(animationFrame > maxAnimationFrames) animationFrame = 0; //reset frame when it reaches ends
+        }
 
         // Drawing player to scene | All images to use imageScale
         // Texture Pro allows character scale and add rectangle from sprite sheet
-        Rectangle source{0.f, 0.f, (float)playerTexture.width / imageFrame, (float)playerTexture.height / imageFrame};
+        Rectangle source{((float)playerTexture.width / imageFrame) * animationFrame, 0.f, (float)playerTexture.width / imageFrame, (float)playerTexture.height / imageFrame};
         Rectangle dest{playerPosition.x, playerPosition.y,
                        ((float)playerTexture.width / imageFrame) * imageScale,
                        ((float)playerTexture.height / imageFrame) * imageScale};
@@ -71,6 +83,8 @@ int main()
             // moving the map position based on our movedirection
             // vector2scale allowing us to add a speed factor to our normalized direction
             mapPosition = Vector2Subtract(mapPosition,Vector2Scale(Vector2Normalize(moveDirection),movementSpeed));
+
+            //----ADD CHANGE IN DIRECTION OF IMAGE BASED ON DIRECTION----//
         }
 
         // teardown Canvas
