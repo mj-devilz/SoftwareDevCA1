@@ -4,7 +4,7 @@
 Player::Player(int screenWidth, int screenHeight)
 {
     width = texture.width / imageFrame;   // get the width of a texture frame (can change this for row)
-    height = texture.height / imageFrame; // get the width of a texture frame (can change this for row)
+    height = texture.height; // get the width of a texture frame (can change this for row)
     // screenPosition = Relation of the upper left corner of texture to the upper left corner of the screen
     screenPosition = {
     (float)screenWidth / 2.0f - (width * 0.5f) * imageScale,
@@ -38,25 +38,25 @@ void Player::tick(float deltaTime)
         // changing characters position - so changed to Add
         worldPosition = Vector2Add(worldPosition, Vector2Scale(Vector2Normalize(moveDirection), movementSpeed));
         //----ADD CHANGE IN DIRECTION OF IMAGE BASED ON DIRECTION----//
-        if (moveDirection.y < 0)
+        if (moveDirection.x < 0)
         {
             // Add Left Texture
-            texture = movement;
+            texture = movementLeft;
         }
-        else if (moveDirection.y > 0)
+        else if (moveDirection.x > 0)
         {
             // Add Right Texture
-            texture = movement;
+            texture = movementRight;
         }
-        else if (moveDirection.y == 0 && moveDirection.x < 0)
+        else if (moveDirection.x == 0 && moveDirection.y < 0)
         {
             // Add Up Texture
-            texture = movement;
+            texture = movementUp;
         }
-        else if (moveDirection.y == 0 && moveDirection.x > 0)
+        else if (moveDirection.x == 0 && moveDirection.y > 0)
         {
             // Add Down Texture
-            texture = movement;
+            texture = movementDown;
         }
     }
     else
