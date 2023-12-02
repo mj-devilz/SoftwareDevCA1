@@ -3,9 +3,8 @@
 class Player
 {
 public:
-    Player();
+    Player(int screenWidth, int screenHeight);
     Vector2 getWorldPosition() { return worldPosition; }       // getter for where player is in world
-    void setScreenPosition(int screenWidth, int screenHeight); // setting the center of screen
     void tick(float deltaTime);                                // movement and animation based on GetFrameTime()
     float getImageScale() { return imageScale; }               // getter for image Scale
     void undoMovement();                                       // undoing the last movement (out of bounds)

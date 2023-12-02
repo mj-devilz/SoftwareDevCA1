@@ -11,9 +11,8 @@ int main()
     // Initialize the Window
     InitWindow(screenWidth, screenHeight, "Blobbo");
     // scaling for all images being added
-    Player player;
+    Player player(screenWidth,screenHeight);
     float imageScale = player.getImageScale();// get scale from class for consistency
-    player.setScreenPosition(screenWidth,screenHeight);
 
     // Getting my map texture 32x32
     Texture2D mapTexture = LoadTexture("tileset/map.png");

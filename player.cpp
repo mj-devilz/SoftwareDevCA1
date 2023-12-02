@@ -1,17 +1,14 @@
 #include "Player.h"
 #include "raymath.h"
 // Source file to define class constructor and functions
-Player::Player()
+Player::Player(int screenWidth, int screenHeight)
 {
     width = texture.width / imageFrame;   // get the width of a texture frame (can change this for row)
     height = texture.height / imageFrame; // get the width of a texture frame (can change this for row)
-}
-// screenPosition = Relation of the upper left corner of texture to the upper left corner of the screen
-void Player::setScreenPosition(int screenWidth, int screenHeight)
-{
+    // screenPosition = Relation of the upper left corner of texture to the upper left corner of the screen
     screenPosition = {
-        (float)screenWidth / 2.0f - (width * 0.5f) * imageScale,
-        (float)screenHeight / 2.0f - (height * 0.5f) * imageScale};
+    (float)screenWidth / 2.0f - (width * 0.5f) * imageScale,
+    (float)screenHeight / 2.0f - (height * 0.5f) * imageScale};
 }
 
 // Called every frame receives deltaTime, allows all variables to be updated every frame
