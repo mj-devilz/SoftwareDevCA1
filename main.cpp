@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include "raymath.h"
 #include "Player.h"
+#include "Enemy.h"
 
 int main()
 {
@@ -18,6 +19,8 @@ int main()
     Texture2D mapTexture = LoadTexture("tileset/map.png");
     // Starting vector of the map
     Vector2 mapPosition{0.0f, 0.0f};
+
+    Enemy redBlob{Vector2{}};
 
     // Setting the Frames Per Second
     SetTargetFPS(60);
@@ -48,6 +51,8 @@ int main()
             // this will return player to previous position if they try to go out of bounds.
             player.undoMovement();
         }
+
+        redBlob.tick(GetFrameTime());
 
         // teardown Canvas
         EndDrawing();
