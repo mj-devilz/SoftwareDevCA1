@@ -6,7 +6,7 @@ Player::Player()
     width = texture.width / imageFrame;   // get the width of a texture frame (can change this for row)
     height = texture.height / imageFrame; // get the width of a texture frame (can change this for row)
 }
-// getting the center of the screen
+// screenPosition = Relation of the upper left corner of texture to the upper left corner of the screen
 void Player::setScreenPosition(int screenWidth, int screenHeight)
 {
     screenPosition = {
