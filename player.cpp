@@ -1,13 +1,17 @@
-#include "player.h"
+#include "Player.h"
 #include "raymath.h"
-// Source file to define functions and class constructor
-
-//getting the center of the screen
+// Source file to define class constructor and functions
+Player::Player()
+{
+    width = texture.width / imageFrame;   // get the width of a texture frame (can change this for row)
+    height = texture.height / imageFrame; // get the width of a texture frame (can change this for row)
+}
+// getting the center of the screen
 void Player::setScreenPosition(int screenWidth, int screenHeight)
 {
     screenPosition = {
-        (float)screenWidth / 2.0f - (((float)texture.width / imageFrame) * 0.5f) * imageScale,
-        (float)screenHeight / 2.0f - (((float)texture.height / imageFrame) * 0.5f) * imageScale};
+        (float)screenWidth / 2.0f - (width * 0.5f) * imageScale,
+        (float)screenHeight / 2.0f - (height * 0.5f) * imageScale};
 }
 
 // Called every frame receives deltaTime, allows all variables to be updated every frame
@@ -74,14 +78,9 @@ void Player::tick(float deltaTime)
 
     // Drawing player to scene | All images to use imageScale
     // Texture Pro allows character scale and add rectangle from sprite sheet
-    Rectangle source{((float)texture.width / imageFrame) * animationFrame,
-                     0.f,
-                     (float)texture.width / imageFrame,
-                     (float)texture.height / imageFrame};
-    Rectangle dest{screenPosition.x,
-                   screenPosition.y,
-                   (imageScale * (float)texture.width / imageFrame),
-                   (imageScale * (float)texture.height / imageFrame)};
+    // width * animation frame = which frame is shown on top row
+    Rectangle source{width * animationFrame, 0.f, width, height};
+    Rectangle dest{screenPosition.x, screenPosition.y, imageScale * width, imageScale * height};
     DrawTexturePro(texture, source, dest, Vector2{}, 0.0f, WHITE);
 
     //---------------FOR DEBUGGING---------------//

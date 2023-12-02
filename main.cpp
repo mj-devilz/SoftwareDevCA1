@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "raymath.h"
+#include "Player.h"
 
 int main()
 {
@@ -72,7 +73,7 @@ int main()
                        (imageScale * (float)playerTexture.width / imageFrame),
                        (imageScale * (float)playerTexture.height / imageFrame)};
         DrawTexturePro(playerTexture, source, dest, Vector2{}, 0.0f, WHITE);
-        
+
         //---------------FOR DEBUGGING---------------//
         DrawRectangleLinesEx(dest, 1.0f, RED);
 
