@@ -1,8 +1,8 @@
 #include "Enemy.h"
 
-Enemy::Enemy(Vector2 spawnPosition):
-        worldPosition(spawnPosition) // member initalizer list to intialize variable
+Enemy::Enemy(Vector2 spawnPosition)
 {
+    worldPosition = spawnPosition;
     width = texture.width / imageFrame; // get the width of a texture frame 
     height = texture.height;            // get the width of a texture frame 
 }
@@ -30,8 +30,4 @@ void Enemy::tick(float deltaTime){
 
     //---------------FOR DEBUGGING---------------//
     DrawRectangleLinesEx(dest, 1.0f, RED);
-}
-
-void Enemy::undoMovement(){
-    worldPosition = worldPositionLastFrame;
 }

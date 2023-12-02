@@ -85,8 +85,3 @@ void Player::tick(float deltaTime)
     //---------------FOR DEBUGGING---------------//
     DrawRectangleLinesEx(dest, 1.0f, RED);
 }
-
-void Player::undoMovement()
-{
-    worldPosition = worldPositionLastFrame;
-}
