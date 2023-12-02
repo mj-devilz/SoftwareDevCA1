@@ -18,6 +18,8 @@ void Player::setScreenPosition(int screenWidth, int screenHeight)
 // movement and animation added to here
 void Player::tick(float deltaTime)
 {
+    // storing the last worldPosition before next is set (important for stopping out of bounds)
+    worldPositionLastFrame = worldPosition;
     // Adding Movement - moving the map / works with WASD and Arrows
     Vector2 moveDirection{};
 
@@ -85,4 +87,8 @@ void Player::tick(float deltaTime)
 
     //---------------FOR DEBUGGING---------------//
     DrawRectangleLinesEx(dest, 1.0f, RED);
+}
+
+void Player::undoMovement(){
+    worldPosition = worldPositionLastFrame;
 }

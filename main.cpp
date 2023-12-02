@@ -38,8 +38,16 @@ int main()
         mapPosition = Vector2Scale(player.getWorldPosition(), -1.0f);
         // Drawing map to scene | Map size scale it x 3
         DrawTextureEx(mapTexture, mapPosition, 0.0f, imageScale, WHITE);
-
+        // runs all the functions needed for drawing player / movement /animating player
         player.tick(GetFrameTime());
+        //check to see if player goes out of bounds i.e. worldPosition moves off map. (take scaling into account)
+        if( player.getWorldPosition().x < 0.0f || 
+            player.getWorldPosition().y < 0.0f || 
+            player.getWorldPosition().x + screenWidth > mapTexture.width * imageScale ||
+            player.getWorldPosition().y + screenHeight > mapTexture.height * imageScale){
+            // this will return player to previous position if they try to go out of bounds. 
+            player.undoMovement();
+        }
 
         // teardown Canvas
         EndDrawing();
