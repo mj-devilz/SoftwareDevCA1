@@ -3,12 +3,12 @@
 // Source file to define class constructor and functions
 Player::Player(int screenWidth, int screenHeight)
 {
-    width = texture.width / imageFrame;   // get the width of a texture frame (can change this for row)
-    height = texture.height; // get the width of a texture frame (can change this for row)
+    width = texture.width / imageFrame; // get the width of a texture frame (can change this for row)
+    height = texture.height;            // get the width of a texture frame (can change this for row)
     // screenPosition = Relation of the upper left corner of texture to the upper left corner of the screen
     screenPosition = {
-    (float)screenWidth / 2.0f - (width * 0.5f) * imageScale,
-    (float)screenHeight / 2.0f - (height * 0.5f) * imageScale};
+        (float)screenWidth / 2.0f - (width * 0.5f) * imageScale,
+        (float)screenHeight / 2.0f - (height * 0.5f) * imageScale};
 }
 
 // Called every frame receives deltaTime, allows all variables to be updated every frame
@@ -86,6 +86,7 @@ void Player::tick(float deltaTime)
     DrawRectangleLinesEx(dest, 1.0f, RED);
 }
 
-void Player::undoMovement(){
+void Player::undoMovement()
+{
     worldPosition = worldPositionLastFrame;
 }

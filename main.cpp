@@ -11,8 +11,8 @@ int main()
     // Initialize the Window
     InitWindow(screenWidth, screenHeight, "Blobbo");
     // scaling for all images being added
-    Player player(screenWidth,screenHeight);
-    float imageScale = player.getImageScale();// get scale from class for consistency
+    Player player(screenWidth, screenHeight);
+    float imageScale = player.getImageScale(); // get scale from class for consistency
 
     // Getting my map texture 32x32
     Texture2D mapTexture = LoadTexture("tileset/map.png");
@@ -39,12 +39,13 @@ int main()
         DrawTextureEx(mapTexture, mapPosition, 0.0f, imageScale, WHITE);
         // runs all the functions needed for drawing player / movement /animating player
         player.tick(GetFrameTime());
-        //check to see if player goes out of bounds i.e. worldPosition moves off map. (take scaling into account)
-        if( player.getWorldPosition().x < 0.0f || 
-            player.getWorldPosition().y < 0.0f || 
+        // check to see if player goes out of bounds i.e. worldPosition moves off map. (take scaling into account)
+        if (player.getWorldPosition().x < 0.0f ||
+            player.getWorldPosition().y < 0.0f ||
             player.getWorldPosition().x + screenWidth > mapTexture.width * imageScale ||
-            player.getWorldPosition().y + screenHeight > mapTexture.height * imageScale){
-            // this will return player to previous position if they try to go out of bounds. 
+            player.getWorldPosition().y + screenHeight > mapTexture.height * imageScale)
+        {
+            // this will return player to previous position if they try to go out of bounds.
             player.undoMovement();
         }
 
