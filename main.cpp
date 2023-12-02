@@ -72,6 +72,8 @@ int main()
                        (imageScale * (float)playerTexture.width / imageFrame),
                        (imageScale * (float)playerTexture.height / imageFrame)};
         DrawTexturePro(playerTexture, source, dest, Vector2{}, 0.0f, WHITE);
+        
+        //---------------FOR DEBUGGING---------------//
         DrawRectangleLinesEx(dest, 1.0f, RED);
 
         // Adding Movement - moving the map / works with WASD and Arrows
