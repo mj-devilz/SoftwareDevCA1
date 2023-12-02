@@ -21,6 +21,7 @@ int main()
     Vector2 mapPosition{0.0f, 0.0f};
 
     Enemy redBlob{Vector2{}};
+    redBlob.setTarget(&player);//target is the address of the player
 
     // Setting the Frames Per Second
     SetTargetFPS(60);
