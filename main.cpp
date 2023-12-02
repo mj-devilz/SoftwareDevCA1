@@ -7,6 +7,12 @@ int main() {
 
     // Initialize the Window
     InitWindow(screenWidth, screenHeight, "Blobbo");
+
+    // Getting my map texture 32x32
+    Texture2D map = LoadTexture("tileset/map.png");
+    // Starting vector of the map
+    Vector2 mapPosition{0.0f,0.0f};
+
     // Setting the Frames Per Second
     SetTargetFPS(60);
 
@@ -19,6 +25,11 @@ int main() {
         ClearBackground(RAYWHITE);
 
         // Here goes all the Game Logic
+        //Drawing map to scene 
+        DrawTexture(map,mapPosition.x,mapPosition.y,WHITE);
+
+
+
 
         // teardown Canvas
         EndDrawing();
