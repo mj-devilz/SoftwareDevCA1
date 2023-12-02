@@ -6,7 +6,7 @@ class Player : public BaseCharacter
 {
 public:
     Player(int screenWidth, int screenHeight);
-    void tick(float deltaTime);                          // movement and animation based on GetFrameTime()
+    virtual void tick(float deltaTime) override;  // movement and animation from BaseCharacter class
 
 private:
 

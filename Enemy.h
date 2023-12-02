@@ -5,7 +5,7 @@ class Enemy : public BaseCharacter{
 
     public:
         Enemy(Vector2 spawnPosition);
-        void tick(float deltaTime);                          // movement and animation based on GetFrameTime()
+        virtual void tick(float deltaTime) override;    // movement and animation from BaseCharacter class
     private:
 
 };
