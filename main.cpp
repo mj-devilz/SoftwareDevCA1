@@ -2,11 +2,11 @@
 
 int main() {
     // Changed window width and height to give a nice square view
-    const int screenWidth = 800;
-    const int screenHeight = 800;
+    const int screenWidth = 500;
+    const int screenHeight = 500;
 
     // Initialize the Window
-    InitWindow(screenWidth, screenHeight, "First Project");
+    InitWindow(screenWidth, screenHeight, "Blobbo");
     // Setting the Frames Per Second
     SetTargetFPS(60);
 
