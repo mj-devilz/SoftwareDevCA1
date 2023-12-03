@@ -14,6 +14,10 @@ int main()
 
     // Initialize the Window
     InitWindow(screenWidth, screenHeight, "Blobbo");
+    InitAudioDevice(); // Initializing game to use audio
+    Music backgroundMusic = LoadMusicStream("audio/Back_Track.mp3"); // added background music track 
+    SetMusicVolume(backgroundMusic,0.3f); // Controlling the track volume from here
+    PlayMusicStream(backgroundMusic); // start playing the music straight away
     // scaling for all images being added
     Player player(screenWidth, screenHeight);
     float imageScale = player.getImageScale(); // get scale from class for consistency
@@ -52,8 +56,11 @@ int main()
         // Drawing map to scene | Map size scale it x 3
         DrawTextureEx(mapTexture, mapPosition, 0.0f, imageScale, WHITE);
 
+        UpdateMusicStream(backgroundMusic); //calling this to keep music streaming
+
         //if paused returns true, we stop all functions until returns false
         if(!paused){
+            ResumeMusicStream(backgroundMusic); // if the user unpauses game, we resume the background music
             //creating a timer to decrement the gameTime value
             timer+=GetFrameTime();
             if(timer>=1.0f){
@@ -93,6 +100,7 @@ int main()
             redBlob.tick(GetFrameTime());
           } else {
             DrawText("Paused",screenHeight/3,screenWidth/3,44,GREEN);
+            PauseMusicStream(backgroundMusic); // When use pauses game, we pause backgroundMusic
           }
 
             ///added to test character death (keep commented out)
@@ -102,7 +110,9 @@ int main()
         // teardown Canvas
         EndDrawing();
     }
-    UnloadTexture(mapTexture);
+    UnloadTexture(mapTexture); //unload maptexture
+    UnloadMusicStream(backgroundMusic); //unload backgroundMusic
+    CloseAudioDevice();
     CloseWindow();
     return 0;
 }
