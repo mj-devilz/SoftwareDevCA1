@@ -21,7 +21,7 @@ int main()
     // scaling for all images being added
     Player player(screenWidth, screenHeight);
     float imageScale = player.getImageScale(); // get scale from class for consistency
-
+    Enemy blob{Vector2{400.0f, 500.0f}, RED};
     // Getting my map texture 32x32
     Texture2D mapTexture = LoadTexture("tileset/map.png");
     // Starting vector of the map
@@ -55,6 +55,7 @@ int main()
 
     int gameTime{0}; // win condition set - timer
     float timer{};    // stores the increment value for the timer
+    bool paused{};
 
     // Setting the Frames Per Second
     SetTargetFPS(60);
@@ -79,9 +80,13 @@ int main()
                                             //  bool to set true/false value to paused when KEY_P is pressed
         if (IsKeyPressed(KEY_P))
         {
-            DrawText("Paused", screenHeight / 3, screenWidth / 3, 44, GREEN);
             PauseMusicStream(backgroundMusic); // When use pauses game, we pause backgroundMusic
+            paused = !paused;
             gameStopped = !gameStopped;
+        }
+        //added this to text for paused will remain
+        if(paused){
+            DrawText("Paused", screenHeight / 3, screenWidth / 3, 44, GREEN);
         }
         // If character is caught (isCaught = true), we stop rendering all items and show game over message
         if (player.getIsCaught())
@@ -129,17 +134,6 @@ int main()
                 
                 enemies[i]->tick(GetFrameTime());
             }
-
-            
-            if(gameTime >=20){
-                        // spawning the array of enemies
-            for(int i=0;i<13;i++){
-                
-                enemies[i]->tick(GetFrameTime());
-            }
-            }
-
-
         }
         // teardown Canvas
         EndDrawing();
