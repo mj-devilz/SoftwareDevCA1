@@ -15,7 +15,9 @@ Player::Player(int screenWidth, int screenHeight)
 // movement and animation added to here
 void Player::tick(float deltaTime)
 {
-
+    if (!getIsAlive())
+        return; // getting isAlive value - if not alive, we don't move or render character
+    // movement input
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))
         velocity.y -= 1.0f;
     if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))
@@ -24,6 +26,6 @@ void Player::tick(float deltaTime)
         velocity.x -= 1.0f;
     if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT))
         velocity.x += 1.0f;
-
+    // calling base class tick - draws character and animates based on direction/speed
     BaseCharacter::tick(deltaTime);
 }

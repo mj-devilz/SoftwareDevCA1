@@ -10,7 +10,8 @@ public:
     float getImageScale() { return imageScale; }         // getter for image Scale
     void undoMovement();                                 // undoing the last movement (out of bounds)
     virtual void tick(float deltaTime);                  // creating a virtual tick class for other classes to override
-
+    bool getIsAlive() { return isAlive; }                // gets isAlive value
+    void setIsAlive(bool alive) { isAlive = alive; }     // sets isAlive value
 protected:
     Texture2D texture{LoadTexture("assets/slime_idles.png")};            // default texture
     Texture2D idle{LoadTexture("assets/slime_idles.png")};               // idle texture
@@ -33,6 +34,7 @@ protected:
     float updateTime{1.0f / 8.0f}; // amount of time to pass before updating animation frame (8 times /second)
     Vector2 velocity{};            // common variable of direction of movement for player and enemy to share
 private:
+    bool isAlive{true}; // bool used to note if character is alive
 };
 
 #endif

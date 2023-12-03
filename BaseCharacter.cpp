@@ -25,7 +25,7 @@ void BaseCharacter::tick(float deltaTime)
             animationFrame = 0; // reset frame when it reaches ends
     }
 
-        // vector2length used to see if there is movement
+    // vector2length used to see if there is movement
     if (Vector2Length(velocity) != 0.0)
     {
         // normalized use to make sure diagonal speed is normalized
@@ -60,7 +60,7 @@ void BaseCharacter::tick(float deltaTime)
         // if direction = 0, then idle animation plays
         texture = idle;
     }
-    velocity={}; // zero out velocity after movement
+    velocity = {}; // zero out velocity after movement
 
     // Drawing player to scene | All images to use imageScale
     // Texture Pro allows character scale and add rectangle from sprite sheet
