@@ -2,6 +2,7 @@
 #include "raymath.h"
 #include "Player.h"
 #include "Enemy.h"
+#include <string>
 
 int main()
 {
@@ -41,20 +42,37 @@ int main()
         mapPosition = Vector2Scale(player.getWorldPosition(), -1.0f);
         // Drawing map to scene | Map size scale it x 3
         DrawTextureEx(mapTexture, mapPosition, 0.0f, imageScale, WHITE);
-        // runs all the functions needed for drawing player / movement /animating player
-        player.tick(GetFrameTime());
-        // check to see if player goes out of bounds i.e. worldPosition moves off map. (take scaling into account)
-        if (player.getWorldPosition().x < 0.0f ||
-            player.getWorldPosition().y < 0.0f ||
-            player.getWorldPosition().x + screenWidth > mapTexture.width * imageScale ||
-            player.getWorldPosition().y + screenHeight > mapTexture.height * imageScale)
-        {
-            // this will return player to previous position if they try to go out of bounds.
-            player.undoMovement();
+
+        //If character is dead (isAlive = false), we stop rendering all items and show game over message
+        if(!player.getIsAlive()){ //character not alive
+            //------------Add Game Over screen------------//
+            DrawText("You died!!!",screenHeight/3,screenWidth/3,44,RED);
+            EndDrawing();
+            continue; // skips to next iteration of while loop.
+        } else { // character alive
+            std::string playersHealth = "Health: ";
+            playersHealth.append(std::to_string(player.getHealth()), 0, 3);
+            DrawText(playersHealth.c_str(),55.0f,40.0f,34.0f,RED);
+            
         }
+            // runs all the functions needed for drawing player / movement /animating player
+            player.tick(GetFrameTime());
+            // check to see if player goes out of bounds i.e. worldPosition moves off map. (take scaling into account)
+            if (player.getWorldPosition().x < 0.0f ||
+                player.getWorldPosition().y < 0.0f ||
+                player.getWorldPosition().x + screenWidth > mapTexture.width * imageScale ||
+                player.getWorldPosition().y + screenHeight > mapTexture.height * imageScale)
+            {
+                // this will return player to previous position if they try to go out of bounds.
+                player.undoMovement();
+            }
 
-        redBlob.tick(GetFrameTime());
-
+            redBlob.tick(GetFrameTime());
+            
+            ///added to test character death (keep commented out)
+            // if(IsKeyDown(KEY_R)){
+            //     player.setIsAlive(false);
+            // }
         // teardown Canvas
         EndDrawing();
     }
