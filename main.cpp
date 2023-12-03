@@ -74,7 +74,7 @@ int main()
                 continue; // skips to next iteration of while loop.
             }
             //If character is caught (isCaught = true), we stop rendering all items and show game over message
-            if(redBlob.getIsCaught()){ //character is caught
+            if(player.getIsCaught()){ //character is caught
                 //------------Add Game Over screen------------//
                 DrawText("You were caught!!!",screenHeight/7,screenWidth/2,44,RED);
                 EndDrawing();
@@ -100,14 +100,15 @@ int main()
 
             redBlob.tick(GetFrameTime());
           } else {
+
             DrawText("Paused",screenHeight/3,screenWidth/3,44,GREEN);
             PauseMusicStream(backgroundMusic); // When use pauses game, we pause backgroundMusic
           }
 
-            ///added to test character death (keep commented out)
-            // if(IsKeyDown(KEY_R)){
-            //     player.setIsAlive(false);
-            // }
+            //added to test character death (keep commented out)
+            if(IsKeyDown(KEY_R)){
+                player.setIsCaught(false);
+            }
         // teardown Canvas
         EndDrawing();
     }

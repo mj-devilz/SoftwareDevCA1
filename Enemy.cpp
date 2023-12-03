@@ -22,7 +22,7 @@ void Enemy::tick(float deltaTime)
     BaseCharacter::tick(deltaTime);
     //Adding collision check to player
     if(CheckCollisionRecs(target->getCollisionRec(),getCollisionRec())){
-        setIsCaught(true);
+        target->setIsCaught(true);
         DrawText("You were caught!!!",40.0f,40.0f,44,RED);
     }
 }

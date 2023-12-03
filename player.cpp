@@ -56,4 +56,8 @@ void Player::tick(float deltaTime)
     }
     // calling base class tick - draws character and animates based on direction/speed
     BaseCharacter::tick(deltaTime);
+
+    if(getIsCaught()){
+        DrawText("dead",20,40,23,BLUE);
+    }
 }

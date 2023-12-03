@@ -39,8 +39,9 @@ protected:
     {
     };                 // allows us to select a different color for sprites
     float boost{1.0f}; // for the boost variable to increase movement speed
+    bool isCaught{}; // bool used to note if character is caught (game end)
 private:
-    bool isCaught{false}; // bool used to note if character is caught (game end)
+
 };
 
 #endif
