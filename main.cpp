@@ -14,6 +14,7 @@ int main()
 
     // Initialize the Window
     InitWindow(screenWidth, screenHeight, "Blobbo");
+    Font bloppyFont = LoadFontEx("assets/BlopyFont.ttf",32,0,250);
     InitAudioDevice();                                               // Initializing game to use audio
     Music backgroundMusic = LoadMusicStream("audio/Back_Track.mp3"); // added background music track
     SetMusicVolume(backgroundMusic, 0.3f);                           // Controlling the track volume from here
@@ -86,7 +87,8 @@ int main()
         }
         //added this to text for paused will remain
         if(paused){
-            DrawText("Paused", screenHeight / 3, screenWidth / 3, 44, GREEN);
+            DrawTextEx(bloppyFont, "Paused", (Vector2){ screenHeight / 3, screenWidth / 3 }, 70, 2, GREEN);
+            // DrawText("Paused", screenHeight / 3, screenWidth / 3, 44, GREEN);
         }
         // If character is caught (isCaught = true), we stop rendering all items and show game over message
         if (player.getIsCaught())
