@@ -26,9 +26,32 @@ int main()
     Texture2D mapTexture = LoadTexture("tileset/map.png");
     // Starting vector of the map
     Vector2 mapPosition{0.0f, 0.0f};
-    // Creating a new enemy class
+    // Creating a enemy classes
     Enemy redBlob{Vector2{400.0f, 500.0f}, RED};
-    redBlob.setTarget(&player); // target is the address of the player
+    Enemy yellowBlob{Vector2{800.0f, 500.0f}, YELLOW};
+    Enemy blueBlob{Vector2{900.0f, 900.0f}, BLUE};
+    Enemy brownBlob{Vector2{1200.0f, 500.0f}, BROWN};
+    Enemy blackBlob{Vector2{3000.0f, 9000.0f}, BLACK};
+    Enemy orangeBlob{Vector2{6000.0f, 4000.0f}, ORANGE};
+    Enemy purpleBlob{Vector2{980.0f, 1000.0f}, PURPLE};
+    Enemy darkGrayBlob{Vector2{400.0f, 1200.0f}, DARKGRAY};
+    Enemy pinkBlob{Vector2{1200.0f, 500.0f}, PINK};
+    Enemy maroonBlob{Vector2{400.0f, 1500.0f}, MAROON};
+    Enemy darkBlueBlob{Vector2{1400.0f, 2500.0f}, DARKBLUE};
+    Enemy beigeBlob{Vector2{2400.0f, 3500.0f}, BEIGE};
+    Enemy goldBlob{Vector2{4400.0f, 2300.0f}, GOLD};
+
+    //creating an array of enemy pointers
+    Enemy* enemies[]{
+        &redBlob,&yellowBlob,&blueBlob,&brownBlob,&blackBlob,&orangeBlob,&purpleBlob,
+        &darkGrayBlob,&pinkBlob,&maroonBlob,&darkBlueBlob,&beigeBlob,&goldBlob
+
+    };
+
+    //need to set the pointer target for the enemies
+    for(auto enemy: enemies){
+        enemy->setTarget(&player);
+    }
 
     int gameTime{0}; // win condition set - timer
     float timer{};    // stores the increment value for the timer
@@ -72,7 +95,7 @@ int main()
             gameStopped = true;
         }
 
-        // if paused returns true, we stop all functions until returns false
+        // if gameStopped returns true, we stop all functions until returns false
         if (!gameStopped)
         {
             ResumeMusicStream(backgroundMusic); // if the user unpauses game, we resume the background music
@@ -100,10 +123,14 @@ int main()
                 // this will return player to previous position if they try to go out of bounds.
                 player.undoMovement();
             }
+            
+            // spawning the array of enemies
+            for(int i=0;i<13;i++){
+                
+                enemies[i]->tick(GetFrameTime());
+            }
 
-            redBlob.tick(GetFrameTime());
         }
-
         // teardown Canvas
         EndDrawing();
     }
