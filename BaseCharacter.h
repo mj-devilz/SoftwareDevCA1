@@ -8,7 +8,7 @@ public:
     BaseCharacter();
     Vector2 getWorldPosition() { return worldPosition; } // getter for where player is in world
     float getImageScale() { return imageScale; }         // getter for image Scale
-    Rectangle getCollisionRec();                           // handling collisions between characters
+    Rectangle getCollisionRec();                         // handling collisions between characters
     void undoMovement();                                 // undoing the last movement (out of bounds)
     virtual void tick(float deltaTime);                  // creating a virtual tick class for other classes to override
 protected:
@@ -38,7 +38,6 @@ protected:
     };                 // allows us to select a different color for sprites
     float boost{1.0f}; // for the boost variable to increase movement speed
 private:
-
 };
 
 #endif

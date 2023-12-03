@@ -5,18 +5,18 @@ BaseCharacter::BaseCharacter()
 {
 }
 
-void BaseCharacter::undoMovement()
+void BaseCharacter::undoMovement() // we rewind the character back, essentially stopping them from moving
 {
     worldPosition = worldPositionLastFrame;
 }
-//creating a common rectanble for collision | needed adjusting for accuracy since collision is important
-Rectangle BaseCharacter::getCollisionRec(){
+// creating a common rectanble for collision | needed adjusting for accuracy since collision is important
+Rectangle BaseCharacter::getCollisionRec()
+{
     return Rectangle{
-        screenPosition.x+imagePadding,
-        screenPosition.y+imagePadding,
-        width/2.0f,
-        height/2.0f
-    };
+        screenPosition.x + imagePadding,
+        screenPosition.y + imagePadding,
+        width / 2.0f,
+        height / 2.0f};
 }
 
 void BaseCharacter::tick(float deltaTime)
@@ -79,5 +79,5 @@ void BaseCharacter::tick(float deltaTime)
     DrawTexturePro(texture, source, dest, Vector2{}, 0.0f, imageColor);
 
     //---------------FOR DEBUGGING---------------//
-    DrawRectangleLinesEx(getCollisionRec(), 1.0f, RED);
+    // DrawRectangleLinesEx(getCollisionRec(), 1.0f, RED);
 }

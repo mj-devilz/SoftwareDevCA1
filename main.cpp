@@ -14,7 +14,8 @@ int main()
 
     // Initialize the Window
     InitWindow(screenWidth, screenHeight, "Blobbo");
-    Font bloppyFont = LoadFontEx("assets/BlopyFont.ttf",32,0,250);
+    Font bloppyFont = LoadFontEx("assets/BlopyFont.ttf", 32, 0, 250);
+    Font SolidOoky = LoadFontEx("assets/SolidOoky.ttf", 32, 0, 250);
     InitAudioDevice();                                               // Initializing game to use audio
     Music backgroundMusic = LoadMusicStream("audio/Back_Track.mp3"); // added background music track
     SetMusicVolume(backgroundMusic, 0.3f);                           // Controlling the track volume from here
@@ -42,20 +43,21 @@ int main()
     Enemy beigeBlob{Vector2{2400.0f, 3500.0f}, BEIGE};
     Enemy goldBlob{Vector2{4400.0f, 2300.0f}, GOLD};
 
-    //creating an array of enemy pointers
-    Enemy* enemies[]{
-        &redBlob,&yellowBlob,&blueBlob,&brownBlob,&blackBlob,&orangeBlob,&purpleBlob,
-        &darkGrayBlob,&pinkBlob,&maroonBlob,&darkBlueBlob,&beigeBlob,&goldBlob
+    // creating an array of enemy pointers
+    Enemy *enemies[]{
+        &redBlob, &yellowBlob, &blueBlob, &brownBlob, &blackBlob, &orangeBlob, &purpleBlob,
+        &darkGrayBlob, &pinkBlob, &maroonBlob, &darkBlueBlob, &beigeBlob, &goldBlob
 
     };
 
-    //need to set the pointer target for the enemies
-    for(auto enemy: enemies){
+    // need to set the pointer target for the enemies
+    for (auto enemy : enemies)
+    {
         enemy->setTarget(&player);
     }
 
     int gameTime{0}; // win condition set - timer
-    float timer{};    // stores the increment value for the timer
+    float timer{};   // stores the increment value for the timer
     bool paused{};
 
     // Setting the Frames Per Second
@@ -85,9 +87,10 @@ int main()
             paused = !paused;
             gameStopped = !gameStopped;
         }
-        //added this to text for paused will remain
-        if(paused){
-            DrawTextEx(bloppyFont, "Paused", (Vector2){ screenHeight / 3, screenWidth / 3 }, 70, 2, GREEN);
+        // added this to text for paused will remain
+        if (paused)
+        {
+            DrawTextEx(bloppyFont, "Paused", (Vector2){screenHeight / 3, screenWidth / 3}, 70, 2, GREEN);
             // DrawText("Paused", screenHeight / 3, screenWidth / 3, 44, GREEN);
         }
         // If character is caught (isCaught = true), we stop rendering all items and show game over message
@@ -130,16 +133,19 @@ int main()
                 // this will return player to previous position if they try to go out of bounds.
                 player.undoMovement();
             }
-            
+
             // spawning the array of enemies
-            for(int i=0;i<13;i++){
-                
+            for (int i = 0; i < 13; i++)
+            {
+
                 enemies[i]->tick(GetFrameTime());
             }
         }
         // teardown Canvas
         EndDrawing();
     }
+    UnloadFont(SolidOoky);              // unloading font
+    UnloadFont(bloppyFont);             // unloading font
     UnloadTexture(mapTexture);          // unload maptexture
     UnloadMusicStream(backgroundMusic); // unload backgroundMusic
     CloseAudioDevice();

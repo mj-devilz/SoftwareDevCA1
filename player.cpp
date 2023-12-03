@@ -56,5 +56,4 @@ void Player::tick(float deltaTime)
     }
     // calling base class tick - draws character and animates based on direction/speed
     BaseCharacter::tick(deltaTime);
-
 }
