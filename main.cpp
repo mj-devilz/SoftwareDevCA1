@@ -27,7 +27,7 @@ int main()
     // Starting vector of the map
     Vector2 mapPosition{0.0f, 0.0f};
     // Creating a new enemy class
-    Enemy redBlob{Vector2{},RED};
+    Enemy redBlob{Vector2{400.0f,500.0f},RED};
     redBlob.setTarget(&player); // target is the address of the player
 
     int gameTime{60}; // win condition set - timer 
