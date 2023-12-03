@@ -1,12 +1,13 @@
 #include "Enemy.h"
 #include "raymath.h"
 
-Enemy::Enemy(Vector2 spawnPosition)
+Enemy::Enemy(Vector2 spawnPosition,struct Color color)
 {
     worldPosition = spawnPosition;
     width = texture.width / imageFrame; // get the width of a texture frame
     height = texture.height;            // get the width of a texture frame
     movementSpeed = 2.0f;
+    imageColor = color;
 }
 
 void Enemy::tick(float deltaTime)

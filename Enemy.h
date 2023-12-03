@@ -6,7 +6,7 @@ class Enemy : public BaseCharacter
 {
 
 public:
-    Enemy(Vector2 spawnPosition);
+    Enemy(Vector2 spawnPosition, struct Color color);
     virtual void tick(float deltaTime) override; // movement and animation from BaseCharacter class
     void setTarget(Player *player) { target = player; };
 

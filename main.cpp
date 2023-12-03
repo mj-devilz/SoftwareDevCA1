@@ -21,7 +21,7 @@ int main()
     // Starting vector of the map
     Vector2 mapPosition{0.0f, 0.0f};
 
-    Enemy redBlob{Vector2{}};
+    Enemy redBlob{Vector2{},RED};
     redBlob.setTarget(&player); // target is the address of the player
 
     // Setting the Frames Per Second
@@ -68,7 +68,7 @@ int main()
             }
 
             redBlob.tick(GetFrameTime());
-            
+
             ///added to test character death (keep commented out)
             // if(IsKeyDown(KEY_R)){
             //     player.setIsAlive(false);

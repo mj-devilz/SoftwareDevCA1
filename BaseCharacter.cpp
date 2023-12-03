@@ -67,7 +67,7 @@ void BaseCharacter::tick(float deltaTime)
     // width * animation frame = which frame is shown on top row
     Rectangle source{width * animationFrame, 0.f, width, height};
     Rectangle dest{screenPosition.x, screenPosition.y, imageScale * width, imageScale * height};
-    DrawTexturePro(texture, source, dest, Vector2{}, 0.0f, WHITE);
+    DrawTexturePro(texture, source, dest, Vector2{}, 0.0f, imageColor);
 
     //---------------FOR DEBUGGING---------------//
     DrawRectangleLinesEx(dest, 1.0f, RED);

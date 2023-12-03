@@ -9,6 +9,7 @@ Player::Player(int screenWidth, int screenHeight)
     screenPosition = {
         (float)screenWidth / 2.0f - (width * 0.5f) * imageScale,
         (float)screenHeight / 2.0f - (height * 0.5f) * imageScale};
+    imageColor = WHITE;
 }
 
 // Called every frame receives deltaTime, allows all variables to be updated every frame
