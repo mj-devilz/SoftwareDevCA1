@@ -31,7 +31,7 @@ protected:
     int animationFrame{};          // frame count
     int maxAnimationFrames{4};     // max number of frames for image
     float updateTime{1.0f / 8.0f}; // amount of time to pass before updating animation frame (8 times /second)
-
+    Vector2 velocity{};            // common variable of direction of movement for player and enemy to share
 private:
 };
 

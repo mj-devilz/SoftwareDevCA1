@@ -15,52 +15,15 @@ Player::Player(int screenWidth, int screenHeight)
 // movement and animation added to here
 void Player::tick(float deltaTime)
 {
-    BaseCharacter::tick(deltaTime);
-    // Adding Movement - moving the map / works with WASD and Arrows
-    Vector2 moveDirection{};
 
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))
-        moveDirection.y -= 1.0f;
+        velocity.y -= 1.0f;
     if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))
-        moveDirection.y += 1.0f;
+        velocity.y += 1.0f;
     if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))
-        moveDirection.x -= 1.0f;
+        velocity.x -= 1.0f;
     if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT))
-        moveDirection.x += 1.0f;
+        velocity.x += 1.0f;
 
-    // vector2length used to see if there is movement
-    if (Vector2Length(moveDirection) != 0.0)
-    {
-        // normalized use to make sure diagonal speed is normalized
-        // moving the map position based on our movedirection
-        // vector2scale allowing us to add a speed factor to our normalized direction
-        // changing characters position - so changed to Add
-        worldPosition = Vector2Add(worldPosition, Vector2Scale(Vector2Normalize(moveDirection), movementSpeed));
-        //----ADD CHANGE IN DIRECTION OF IMAGE BASED ON DIRECTION----//
-        if (moveDirection.x < 0)
-        {
-            // Add Left Texture
-            texture = movementLeft;
-        }
-        else if (moveDirection.x > 0)
-        {
-            // Add Right Texture
-            texture = movementRight;
-        }
-        else if (moveDirection.x == 0 && moveDirection.y < 0)
-        {
-            // Add Up Texture
-            texture = movementUp;
-        }
-        else if (moveDirection.x == 0 && moveDirection.y > 0)
-        {
-            // Add Down Texture
-            texture = movementDown;
-        }
-    }
-    else
-    {
-        // if direction = 0, then idle animation plays
-        texture = idle;
-    }
+    BaseCharacter::tick(deltaTime);
 }
