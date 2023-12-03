@@ -20,4 +20,9 @@ void Enemy::tick(float deltaTime)
     screenPosition = Vector2Subtract(worldPosition, target->getWorldPosition());
     // running the tick function on parent class - draw texture and movement
     BaseCharacter::tick(deltaTime);
+    //Adding collision check to player
+    if(CheckCollisionRecs(target->getCollisionRec(),getCollisionRec())){
+        setIsCaught(true);
+        DrawText("You were caught!!!",40.0f,40.0f,44,RED);
+    }
 }

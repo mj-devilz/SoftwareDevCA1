@@ -74,15 +74,16 @@ int main()
                 continue; // skips to next iteration of while loop.
             }
             //If character is caught (isCaught = true), we stop rendering all items and show game over message
-            if(player.getIsCaught()){ //character is caught
+            if(redBlob.getIsCaught()){ //character is caught
                 //------------Add Game Over screen------------//
-                DrawText("You were caught!!!",screenHeight/3,screenWidth/3,44,RED);
+                DrawText("You were caught!!!",screenHeight/7,screenWidth/2,44,RED);
                 EndDrawing();
                 continue; // skips to next iteration of while loop.
             } else { // character alive
-                std::string playersHealth = "Timer: ";
-                playersHealth.append(std::to_string(gameTime), 0, 3);
-                DrawText(playersHealth.c_str(),screenWidth*0.6f,20.0f,40.0f,RED);
+                // Timer displayed on top right of screen
+                std::string timerCount = "Timer: "; 
+                timerCount.append(std::to_string(gameTime), 0, 3);
+                DrawText(timerCount.c_str(),screenWidth*0.6f,20.0f,40.0f,BLUE);
                 
             }
             // runs all the functions needed for drawing player / movement /animating player
