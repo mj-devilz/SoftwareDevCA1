@@ -17,6 +17,7 @@ private:
     float boostCooldown{3.0f}; // cooldown added until boost can be activated again
     bool boostActive{false};   // if boost is active or not
     float boostStart{};        // frame when the boost was initiated
+    Sound boostsound{LoadSound("audio/player_speedSound.mp3")}; // loading audio for boosting speed
 };
 
 #endif

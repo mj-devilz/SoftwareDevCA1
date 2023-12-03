@@ -33,6 +33,7 @@ void Player::tick(float deltaTime)
         {
             boostActive = true;
             boost = 2.0f;
+            PlaySound(boostsound);
         }
     }
     if (boostActive)
