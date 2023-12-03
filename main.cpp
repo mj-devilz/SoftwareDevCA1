@@ -30,7 +30,7 @@ int main()
     Enemy redBlob{Vector2{400.0f, 500.0f}, RED};
     redBlob.setTarget(&player); // target is the address of the player
 
-    int gameTime{60}; // win condition set - timer
+    int gameTime{0}; // win condition set - timer
     float timer{};    // stores the increment value for the timer
 
     // Setting the Frames Per Second
@@ -68,6 +68,7 @@ int main()
             std::string playerScore = "You scored: ";
             playerScore.append(std::to_string(gameTime), 0, 3);
             DrawText(playerScore.c_str(), 80.0f, screenWidth / 1.5, 40.0f, GREEN);
+            PauseMusicStream(backgroundMusic); // When use pauses game, we pause backgroundMusic
             gameStopped = true;
         }
 
@@ -79,15 +80,8 @@ int main()
             timer += GetFrameTime();
             if (timer >= 1.0f)
             {
-                gameTime--;
+                gameTime++;
                 timer = 0.0f;
-            }
-            // winning condition is to survive until timer is up once won, we stop the game.
-            if (gameTime <= 0)
-            {
-                DrawText("You win!!!", screenHeight / 3, screenWidth / 3, 44, GREEN);
-                EndDrawing();
-                continue; // skips to next iteration of while loop.
             }
 
             // Timer displayed on top right of screen
@@ -108,17 +102,8 @@ int main()
             }
 
             redBlob.tick(GetFrameTime());
-        } else {
-            // if(player.getIsCaught()){
-            //     DrawText("You were caught!!!", screenHeight / 7, screenWidth / 2, 44, RED);
-            // }
         }
 
-        // added to test character death (keep commented out)
-        if (IsKeyDown(KEY_R))
-        {
-            player.setIsCaught(false);
-        }
         // teardown Canvas
         EndDrawing();
     }
