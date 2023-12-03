@@ -29,3 +29,11 @@ void Player::tick(float deltaTime)
     // calling base class tick - draws character and animates based on direction/speed
     BaseCharacter::tick(deltaTime);
 }
+// user takes damage
+void Player::takeDamage(float damage)
+{
+    health -= damage;
+    if(health <=0){
+        setIsAlive(false);
+    }
+}

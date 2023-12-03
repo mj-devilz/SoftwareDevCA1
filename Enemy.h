@@ -12,4 +12,5 @@ public:
 
 private:
     Player *target; // pointer to character header
+    float damagePerSecond{20.0f}; // damage the enemy does
 };
