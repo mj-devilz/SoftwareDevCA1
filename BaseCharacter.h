@@ -8,6 +8,7 @@ public:
     BaseCharacter();
     Vector2 getWorldPosition() { return worldPosition; } // getter for where player is in world
     float getImageScale() { return imageScale; }         // getter for image Scale
+    Rectangle getCollisionRec();                           // handling collisions between characters
     void undoMovement();                                 // undoing the last movement (out of bounds)
     virtual void tick(float deltaTime);                  // creating a virtual tick class for other classes to override
     bool getIsCaught() { return isCaught; }                // gets isCaught value
@@ -27,6 +28,7 @@ protected:
     float movementSpeed{3.0f};                                           // movement for the character
     float width{};                                                       // width of the player texture
     float height{};                                                      // height of the player texture
+    float imagePadding{80.0f};
     // Animation variables
     float runningTime{};           // updated every frame
     int animationFrame{};          // frame count
