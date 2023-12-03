@@ -16,8 +16,8 @@ Player::Player(int screenWidth, int screenHeight)
 // movement and animation added to here
 void Player::tick(float deltaTime)
 {
-    if (!getIsAlive())
-        return; // getting isAlive value - if not alive, we don't move or render character
+    if (getIsCaught())
+        return; // getting isCaught value - if true, we don't move or render character
     // movement input
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))
         velocity.y -= 1.0f;
@@ -27,14 +27,32 @@ void Player::tick(float deltaTime)
         velocity.x -= 1.0f;
     if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT))
         velocity.x += 1.0f;
+    if (IsKeyPressed(KEY_SPACE))
+    {
+        if (!boostActive)
+        {
+            boostActive = true;
+            boost = 2.0f;
+        }
+    }
+    if (boostActive)
+    {
+        boostStart += deltaTime;
+        if (boostStart >= boostTime)
+        {
+            boost = 1.0f;
+        }
+        if (boostStart >= boostCooldown)
+        {
+            boostStart = 0.0f;
+            boostActive = false;
+        }
+        DrawText("active", 20, 20, 20, RED);
+    }
+    else
+    {
+        DrawText("not active", 20, 20, 20, RED);
+    }
     // calling base class tick - draws character and animates based on direction/speed
     BaseCharacter::tick(deltaTime);
-}
-// user takes damage
-void Player::takeDamage(float damage)
-{
-    health -= damage;
-    if(health <=0){
-        setIsAlive(false);
-    }
 }

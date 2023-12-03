@@ -32,7 +32,7 @@ void BaseCharacter::tick(float deltaTime)
         // moving the map position based on our movedirection
         // vector2scale allowing us to add a speed factor to our normalized direction
         // changing characters position - so changed to Add
-        worldPosition = Vector2Add(worldPosition, Vector2Scale(Vector2Normalize(velocity), movementSpeed));
+        worldPosition = Vector2Add(worldPosition, Vector2Scale(Vector2Normalize(velocity), movementSpeed * boost));
         //----ADD CHANGE IN DIRECTION OF IMAGE BASED ON DIRECTION----//
         if (velocity.x < 0)
         {

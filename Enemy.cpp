@@ -12,9 +12,6 @@ Enemy::Enemy(Vector2 spawnPosition,struct Color color)
 
 void Enemy::tick(float deltaTime)
 {
-
-    if (!getIsAlive())
-        return; // getting isAlive value - if not alive, we don't move or render character
     // moving enemy towards the character
     //  Direction to target (using velocity, this is now normalized / scaled by speed and worldposition set in tick)
     velocity = Vector2Subtract(target->getScreenPosition(), screenPosition);

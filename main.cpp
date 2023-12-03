@@ -43,10 +43,10 @@ int main()
         // Drawing map to scene | Map size scale it x 3
         DrawTextureEx(mapTexture, mapPosition, 0.0f, imageScale, WHITE);
 
-        //If character is dead (isAlive = false), we stop rendering all items and show game over message
-        if(!player.getIsAlive()){ //character not alive
+        //If character is caught (isCaught = true), we stop rendering all items and show game over message
+        if(player.getIsCaught()){ //character is caught
             //------------Add Game Over screen------------//
-            DrawText("You died!!!",screenHeight/3,screenWidth/3,44,RED);
+            DrawText("You were caught!!!",screenHeight/3,screenWidth/3,44,RED);
             EndDrawing();
             continue; // skips to next iteration of while loop.
         } else { // character alive
