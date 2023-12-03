@@ -14,12 +14,12 @@ int main()
 
     // Initialize the Window
     InitWindow(screenWidth, screenHeight, "Blobbo");
-    Font bloppyFont = LoadFontEx("assets/BlopyFont.ttf", 32, 0, 250);
-    Font SolidOoky = LoadFontEx("assets/SolidOoky.ttf", 32, 0, 250);
-    InitAudioDevice();                                               // Initializing game to use audio
-    Music backgroundMusic = LoadMusicStream("audio/Back_Track.mp3"); // added background music track
-    SetMusicVolume(backgroundMusic, 0.3f);                           // Controlling the track volume from here
-    PlayMusicStream(backgroundMusic);                                // start playing the music straight away
+    Font bloppyFont = LoadFontEx("assets/BlopyFont.ttf", 32, 0, 250); // importing font
+    Font SolidOoky = LoadFontEx("assets/SolidOoky.ttf", 32, 0, 250);  // importing font
+    InitAudioDevice();                                                // Initializing game to use audio
+    Music backgroundMusic = LoadMusicStream("audio/Back_Track.mp3");  // added background music track
+    SetMusicVolume(backgroundMusic, 0.3f);                            // Controlling the track volume from here
+    PlayMusicStream(backgroundMusic);                                 // start playing the music straight away
     // scaling for all images being added
     Player player(screenWidth, screenHeight);
     float imageScale = player.getImageScale(); // get scale from class for consistency
@@ -97,10 +97,11 @@ int main()
         if (player.getIsCaught())
         { // character is caught
             //------------Add Game Over screen------------//
-            DrawText("You were caught!!!", screenHeight / 7, screenWidth / 2, 44, RED);
+            DrawTextEx(SolidOoky, "You were caught!!!", (Vector2){20.0f, 40.0f}, 50, 2, RED);
+            // DrawText("You were caught!!!", screenHeight / 7, screenWidth / 2, 44, RED);
             std::string playerScore = "You scored: ";
             playerScore.append(std::to_string(gameTime), 0, 3);
-            DrawText(playerScore.c_str(), 80.0f, screenWidth / 1.5, 40.0f, GREEN);
+            DrawTextEx(SolidOoky, playerScore.c_str(), (Vector2){20.0f, screenWidth / 1.5}, 65.0f, 2, GREEN);
             PauseMusicStream(backgroundMusic); // When use pauses game, we pause backgroundMusic
             gameStopped = true;
         }
@@ -109,7 +110,7 @@ int main()
         if (!gameStopped)
         {
             ResumeMusicStream(backgroundMusic); // if the user unpauses game, we resume the background music
-            // creating a timer to decrement the gameTime value
+            // creating a timer to increment the gameTime value
             timer += GetFrameTime();
             if (timer >= 1.0f)
             {
