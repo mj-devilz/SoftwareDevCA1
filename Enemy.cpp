@@ -4,7 +4,7 @@
 Enemy::Enemy(Vector2 spawnPosition,struct Color color)
 {
     worldPosition = spawnPosition;
-    movementSpeed = 2.0f;
+    movementSpeed = 2.5f;
     width = texture.width / imageFrame; // get the width of a texture frame
     height = texture.height;            // get the width of a texture frame
     imageColor = color;
