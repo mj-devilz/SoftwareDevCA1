@@ -4,7 +4,7 @@
 #include "Enemy.h"
 #include <string>
 
-bool paused{false}; //adding global bool variable for pause
+bool gameStopped{false}; // adding global bool variable for pause
 
 int main()
 {
@@ -14,10 +14,10 @@ int main()
 
     // Initialize the Window
     InitWindow(screenWidth, screenHeight, "Blobbo");
-    InitAudioDevice(); // Initializing game to use audio
-    Music backgroundMusic = LoadMusicStream("audio/Back_Track.mp3"); // added background music track 
-    SetMusicVolume(backgroundMusic,0.3f); // Controlling the track volume from here
-    PlayMusicStream(backgroundMusic); // start playing the music straight away
+    InitAudioDevice();                                               // Initializing game to use audio
+    Music backgroundMusic = LoadMusicStream("audio/Back_Track.mp3"); // added background music track
+    SetMusicVolume(backgroundMusic, 0.3f);                           // Controlling the track volume from here
+    PlayMusicStream(backgroundMusic);                                // start playing the music straight away
     // scaling for all images being added
     Player player(screenWidth, screenHeight);
     float imageScale = player.getImageScale(); // get scale from class for consistency
@@ -27,11 +27,11 @@ int main()
     // Starting vector of the map
     Vector2 mapPosition{0.0f, 0.0f};
     // Creating a new enemy class
-    Enemy redBlob{Vector2{400.0f,500.0f},RED};
+    Enemy redBlob{Vector2{400.0f, 500.0f}, RED};
     redBlob.setTarget(&player); // target is the address of the player
 
-    int gameTime{60}; // win condition set - timer 
-    float timer{}; // stores the increment value for the timer
+    int gameTime{60}; // win condition set - timer
+    float timer{};    // stores the increment value for the timer
 
     // Setting the Frames Per Second
     SetTargetFPS(60);
@@ -44,10 +44,6 @@ int main()
         BeginDrawing();
         // Clear canvas to a specific color to avoid flicker
         ClearBackground(RAYWHITE);
-        // bool to set true/false value to paused when KEY_P is pressed
-        if(IsKeyPressed(KEY_P)){
-            paused = !paused;
-        }
 
         // Here goes all the Game Logic
         // Need to update the map position based on the characters world position
@@ -56,36 +52,49 @@ int main()
         // Drawing map to scene | Map size scale it x 3
         DrawTextureEx(mapTexture, mapPosition, 0.0f, imageScale, WHITE);
 
-        UpdateMusicStream(backgroundMusic); //calling this to keep music streaming
+        UpdateMusicStream(backgroundMusic); // calling this to keep music streaming
+                                            //  bool to set true/false value to paused when KEY_P is pressed
+        if (IsKeyPressed(KEY_P))
+        {
+            DrawText("Paused", screenHeight / 3, screenWidth / 3, 44, GREEN);
+            PauseMusicStream(backgroundMusic); // When use pauses game, we pause backgroundMusic
+            gameStopped = !gameStopped;
+        }
+        // If character is caught (isCaught = true), we stop rendering all items and show game over message
+        if (player.getIsCaught())
+        { // character is caught
+            //------------Add Game Over screen------------//
+            DrawText("You were caught!!!", screenHeight / 7, screenWidth / 2, 44, RED);
+            std::string playerScore = "You scored: ";
+            playerScore.append(std::to_string(gameTime), 0, 3);
+            DrawText(playerScore.c_str(), 80.0f, screenWidth / 1.5, 40.0f, GREEN);
+            gameStopped = true;
+        }
 
-        //if paused returns true, we stop all functions until returns false
-        if(!paused){
+        // if paused returns true, we stop all functions until returns false
+        if (!gameStopped)
+        {
             ResumeMusicStream(backgroundMusic); // if the user unpauses game, we resume the background music
-            //creating a timer to decrement the gameTime value
-            timer+=GetFrameTime();
-            if(timer>=1.0f){
+            // creating a timer to decrement the gameTime value
+            timer += GetFrameTime();
+            if (timer >= 1.0f)
+            {
                 gameTime--;
                 timer = 0.0f;
             }
-            //winning condition is to survive until timer is up once won, we stop the game.
-            if(gameTime<=0){
-                DrawText("You win!!!",screenHeight/3,screenWidth/3,44,GREEN);
+            // winning condition is to survive until timer is up once won, we stop the game.
+            if (gameTime <= 0)
+            {
+                DrawText("You win!!!", screenHeight / 3, screenWidth / 3, 44, GREEN);
                 EndDrawing();
                 continue; // skips to next iteration of while loop.
             }
-            //If character is caught (isCaught = true), we stop rendering all items and show game over message
-            if(player.getIsCaught()){ //character is caught
-                //------------Add Game Over screen------------//
-                DrawText("You were caught!!!",screenHeight/7,screenWidth/2,44,RED);
-                EndDrawing();
-                continue; // skips to next iteration of while loop.
-            } else { // character alive
-                // Timer displayed on top right of screen
-                std::string timerCount = "Timer: "; 
-                timerCount.append(std::to_string(gameTime), 0, 3);
-                DrawText(timerCount.c_str(),screenWidth*0.6f,20.0f,40.0f,BLUE);
-                
-            }
+
+            // Timer displayed on top right of screen
+            std::string timerCount = "Timer: ";
+            timerCount.append(std::to_string(gameTime), 0, 3);
+            DrawText(timerCount.c_str(), screenWidth * 0.6f, 20.0f, 40.0f, BLUE);
+
             // runs all the functions needed for drawing player / movement /animating player
             player.tick(GetFrameTime());
             // check to see if player goes out of bounds i.e. worldPosition moves off map. (take scaling into account)
@@ -99,21 +108,22 @@ int main()
             }
 
             redBlob.tick(GetFrameTime());
-          }
+        } else {
+            // if(player.getIsCaught()){
+            //     DrawText("You were caught!!!", screenHeight / 7, screenWidth / 2, 44, RED);
+            // }
+        }
 
-            DrawText("Paused",screenHeight/3,screenWidth/3,44,GREEN);
-            PauseMusicStream(backgroundMusic); // When use pauses game, we pause backgroundMusic
-          
-
-            //added to test character death (keep commented out)
-            if(IsKeyDown(KEY_R)){
-                player.setIsCaught(false);
-            }
+        // added to test character death (keep commented out)
+        if (IsKeyDown(KEY_R))
+        {
+            player.setIsCaught(false);
+        }
         // teardown Canvas
         EndDrawing();
     }
-    UnloadTexture(mapTexture); //unload maptexture
-    UnloadMusicStream(backgroundMusic); //unload backgroundMusic
+    UnloadTexture(mapTexture);          // unload maptexture
+    UnloadMusicStream(backgroundMusic); // unload backgroundMusic
     CloseAudioDevice();
     CloseWindow();
     return 0;
