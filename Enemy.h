@@ -13,4 +13,5 @@ public:
 private:
     Player *target; // pointer to character header
     float damagePerSecond{20.0f}; // damage the enemy does
+    float minDistToPlayer{20.0f}; // distance where enemy stops moving towards player (glitch fix)
 };
