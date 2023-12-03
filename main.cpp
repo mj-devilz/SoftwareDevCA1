@@ -99,11 +99,11 @@ int main()
             }
 
             redBlob.tick(GetFrameTime());
-          } else {
+          }
 
             DrawText("Paused",screenHeight/3,screenWidth/3,44,GREEN);
             PauseMusicStream(backgroundMusic); // When use pauses game, we pause backgroundMusic
-          }
+          
 
             //added to test character death (keep commented out)
             if(IsKeyDown(KEY_R)){

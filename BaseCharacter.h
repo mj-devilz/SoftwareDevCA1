@@ -11,8 +11,6 @@ public:
     Rectangle getCollisionRec();                           // handling collisions between characters
     void undoMovement();                                 // undoing the last movement (out of bounds)
     virtual void tick(float deltaTime);                  // creating a virtual tick class for other classes to override
-    bool getIsCaught() { return isCaught; }                // gets isCaught value
-    void setIsCaught(bool caught) { isCaught = caught; }     // sets isCaught value
 protected:
     Texture2D texture{LoadTexture("assets/slime_idles.png")};            // default texture
     Texture2D idle{LoadTexture("assets/slime_idles.png")};               // idle texture
@@ -39,7 +37,6 @@ protected:
     {
     };                 // allows us to select a different color for sprites
     float boost{1.0f}; // for the boost variable to increase movement speed
-    bool isCaught{}; // bool used to note if character is caught (game end)
 private:
 
 };
