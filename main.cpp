@@ -130,6 +130,16 @@ int main()
                 enemies[i]->tick(GetFrameTime());
             }
 
+            
+            if(gameTime >=20){
+                        // spawning the array of enemies
+            for(int i=0;i<13;i++){
+                
+                enemies[i]->tick(GetFrameTime());
+            }
+            }
+
+
         }
         // teardown Canvas
         EndDrawing();

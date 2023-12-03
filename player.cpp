@@ -48,16 +48,13 @@ void Player::tick(float deltaTime)
             boostStart = 0.0f;
             boostActive = false;
         }
-        DrawText("active", 20, 20, 20, RED);
+        DrawText("Boost not available", 20, 20, 20, RED);
     }
     else
     {
-        DrawText("not active", 20, 20, 20, RED);
+        DrawText("Boost available", 20, 20, 20, RED);
     }
     // calling base class tick - draws character and animates based on direction/speed
     BaseCharacter::tick(deltaTime);
 
-    if(getIsCaught()){
-        DrawText("dead",20,40,23,BLUE);
-    }
 }
